@@ -309,7 +309,7 @@
 <div class="wrap">
     <!--公共头部-->
     <header class="global-header search-header border-1px-bottom bg-red">
-        <div class="center-area">教室预约平台</div>
+        <div class="center-area">家教预约平台</div>
     </header>
     <div class="bg-red top-box">
 
@@ -346,7 +346,7 @@
             <a href="/page/appointment">
                 <div class="class-item">
                     <img src="/img/enter.png">
-                    <span class="class-name">预约教室入口</span>
+                    <span class="class-name">预约家教入口</span>
                 </div>
             </a>
             <a href="/page/myOrder">
