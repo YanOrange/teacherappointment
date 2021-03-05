@@ -75,6 +75,45 @@
         .comment-content{
             padding: 0.3rem 0 0 0.3rem;
         }
+        .write-comment{
+            width:100%;
+            height:3rem;
+            background: #fff;
+            border-radius: 0.4rem 0.4rem 0 0;
+            position: fixed;
+            bottom:0;
+            box-shadow: 0 -1px 9px 0px rgb(0 0 0 / 18%);
+            z-index: 2;
+        }
+        .write-comment textarea{
+            border:1px solid #ccc;
+            width:100%;
+
+        }
+        .write-comment button{
+            position: absolute;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            width: 2rem;
+            height: 0.6rem;
+            color: #fff;
+            background: #ff5400;
+            margin-top: 0.1rem;
+        }
+        .area{
+            margin-top: 0.2rem;
+            padding:0 0.3rem;
+        }
+        .write-comment-nav{
+            background: rgba(0,0,0,.3);
+            width:100%;
+            height:100%;
+            position: fixed;
+            top: 0;
+            z-index: 1;
+            display: none;
+        }
 
 
 
@@ -135,6 +174,18 @@
     <a class="comment">留言</a>
     <a class="appointment" href="tel:17600449652">电话预约</a>
 </div>
+<div class="write-comment-nav">
+    <dvi class="write-comment">
+        <div class="title">
+            评论
+        </div>
+        <div class="area">
+            <textarea rows="3" cols="20" placeholder="请输入内容..." id="comment"></textarea>
+        </div>
+        <button onclick="comment();">提交</button>
+    </dvi>
+</div>
+<#--<input type="hidden" value="${content.id!''}">-->
 <script src="../js/lib/zepto.js"></script>
 <script src="../js/lib/jquery-2.1.1.min.js"></script>
 <script src="../js/plugins/dialog.js"></script>
@@ -144,6 +195,39 @@
 
 
     })
+
+    $('.write-comment-nav').on('click',function(){
+        if(event.target!=this) return;
+        $('.write-comment-nav').hide();
+        $('#comment').val("")
+    })
+    $('.comment').on('click',function(){
+        $('.write-comment-nav').show();
+    })
+
+    /**
+     * 发表评论
+     */
+    function comment(){
+        var contentId = $('#contentId').val();
+        var comment = $('#comment').val();
+        $.ajax({
+            url:'',
+            data:{
+                comment:comment,
+                contentId:contentId
+            },
+            success:function(res){
+                if(res.success){
+                    $('.write-comment-nav').hide();
+                    $('#comment').val("")
+                }else{
+                    alert(res.msg)
+                }
+            }
+        })
+    }
+
 
 
 </script>
