@@ -23,4 +23,23 @@ public class User {
     private String passWord;
 
     private Date createTime;
+
+    private String name;
+
+    private String age;
+
+    private String address;
+
+    private String phone;
+
+    private String idCard;
+
+    private Integer status;//0 未认证 1 已认证
+
+    private String school;//毕业院校
+
+    private String education;//学历
+
+    private Integer invalid;//失效用户 0否 1是
+
 }

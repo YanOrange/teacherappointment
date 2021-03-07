@@ -160,18 +160,9 @@
 <div class="wrap">
     <!--公共头部-->
     <header class="global-header search-header border-1px-bottom bg-red">
-        <div class="center-area">家教预约平台</div>
-        <div style="position: absolute;right:0.2rem;top: 0;" id="slideType">切换分类</div>
+        <div class="center-area">我的发布</div>
     </header>
 
-    <div class="type-list">
-        <ul>
-            <li class="active" data-type="">分类1</li>
-            <li data-type="">分类2</li>
-            <li data-type="">分类3</li>
-            <li data-type="">分类4</li>
-        </ul>
-    </div>
     <div class="content-list">
         <div class="item">
             <div class="title-warper">
@@ -192,7 +183,7 @@
                 </div>
                 <div class="distance">
                     <span>博士</span>
-                    <span>求助帖</span>
+                    <span>学历</span>
                 </div>
             </div>
             <div class="support-tags">
@@ -219,7 +210,7 @@
                 </div>
                 <div class="distance">
                     <span>博士</span>
-                    <span>家教贴</span>
+                    <span>学历</span>
                 </div>
             </div>
             <div class="support-tags">
@@ -256,40 +247,14 @@
 <script src="../js/lib/jquery.fly.min.js"></script>
 <script>
     $(function () {
-
-        $('.type-list').on('click', 'li', function () {
-            $(this).siblings().removeClass('active');
-            $(this).addClass('active');
-            $(this).data('typeid')
-            getContent(1);
-        })
-        // getContent(1);
-    })
-
-    $('.global-header').on('click', '#slideType', function () {
-
-        $('.type-list ul').html('<li data-type="">分类6</li>\n' +
-            '            <li data-type="">分类6</li>\n' +
-            '            <li data-type="">分类6</li>');
-        $(this).attr('id', 'slideType2')
-    })
-
-    $('.global-header').on('click', '#slideType2', function () {
-
-        $('.type-list ul').html('<li data-type="">分类1</li>\n' +
-            '            <li data-type="">分类2</li>\n' +
-            '            <li data-type="">分类3</li>\n' +
-            '            <li data-type="">分类4</li>');
-        $(this).attr('id', 'slideType')
+        getContent();
     })
 
 
-    function getContent(typeId) {
+
+    function getContent() {
         $.ajax({
-            url: '/lesson/getContent',
-            data: {
-                typeId: typeId
-            },
+            url: '/content/findListByUserId',
             dataType: 'json',
             success: function (res) {
                 if (res.success) {
@@ -315,7 +280,7 @@
                             '                </div>\n' +
                             '                <div class="distance">\n' +
                             '                    <span>博士</span>\n' +
-                            '                    <span>家教贴</span>\n' +
+                            '                    <span>学历</span>\n' +
                             '                </div>\n' +
                             '            </div>\n' +
                             '            <div class="support-tags">\n' +
