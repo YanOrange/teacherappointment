@@ -113,7 +113,7 @@
             <div class="img"><img src="../img/icons/home-active.png"></div>
             <div class="text">首页</div>
         </a>
-        <a href="/page/index" class="home">
+        <a href="/page/type" class="home">
             <div class="img"><img src="../img/icons/home-active.png"></div>
             <div class="text">分类</div>
         </a>
@@ -129,12 +129,12 @@
 
     //查看发布信息
     $('#done').on('click',function () {
-        location.href="/page/myOrder";
+        location.href="/page/contentList";
     });
 
     //修改个人信息
     $('#edit').on('click',function () {
-        location.href="/page/editInfo";
+        location.href="/user/editInfo";
     });
 
 

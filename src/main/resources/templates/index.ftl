@@ -410,7 +410,7 @@
         <div class="img"><img src="../img/icons/home-active.png"></div>
         <div class="text">首页</div>
     </a>
-    <a href="/page/index" class="home">
+    <a href="/page/type" class="home">
         <div class="img"><img src="../img/icons/home-active.png"></div>
         <div class="text">分类</div>
     </a>

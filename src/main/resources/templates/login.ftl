@@ -129,8 +129,8 @@
         $.ajax({
             url:'/user/login',
             data:{
-                account:phone,
-                pass:verCode
+                userName:phone,
+                passWord:verCode
             },
             dataType:'json',
             success:function (res) {

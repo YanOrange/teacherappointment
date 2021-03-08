@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="grey"/>
     <meta name="format-detection" content="telephone=no,address=no,email=no"/>
-    <title>注册</title>
+    <title>认证</title>
     <script>
         var deviceWidth = document.documentElement.clientWidth;
         if (deviceWidth > 640) deviceWidth = 640;
@@ -54,39 +54,19 @@
     <!--公共头部-->
     <header class="global-header border-1px-bottom">
         <div class="left-area" onclick="javascript:history.back(-1)"><i class="icon-arr-left"></i></div>
-        <div class="center-area">注册</div>
+        <div class="center-area">认证身份</div>
     </header>
     <!--表单-->
     <div class="form">
         <div class="input-group border-1px-bottom">
-            <div class="tit">账号</div>
-            <input type="tel" placeholder="请输入账号" value="" id="account">
-        </div>
-        <div class="input-group border-1px-bottom">
-            <div class="tit">密码</div>
-            <input type="passWord" placeholder="请输入密码" value="" id="pass">
-        </div>
-        <div class="input-group border-1px-bottom">
-            <div class="tit">姓名</div>
-            <input type="tel" placeholder="请输入姓名" value="" id="name">
-        </div>
-        <div class="input-group border-1px-bottom">
-            <div class="tit">年龄</div>
-            <input type="tel" placeholder="请输入年龄" value="" id="age">
-        </div>
-        <div class="input-group border-1px-bottom">
-            <div class="tit">地址</div>
-            <input type="tel" placeholder="请输入地址" value="" id="address">
-        </div>
-        <div class="input-group border-1px-bottom">
-            <div class="tit">联系方式</div>
-            <input type="tel" placeholder="请输入手机号码" value="" id="phone">
+            <div class="tit">身份证号</div>
+            <input type="tel" placeholder="请输入身份证号" value="" id="idCard">
         </div>
     </div>
     <!--底部工具栏-->
     <div class="global-footer for-edit">
         <!-- <button class="btn btn-primary btn-full">保存并使用</button> -->
-        <button class="btn btn-primary btn-full" id="submit" onclick="register();">注册</button>
+        <button class="btn btn-primary btn-full" id="submit" onclick="register();">修改</button>
     </div>
 </div>
 <script src="../js/lib/zepto.js"></script>
@@ -98,9 +78,8 @@
         var address = $('#address').val();
         var age = $('#age').val();
         var phone = $('#phone').val();
-        var account = $('#account').val();
         var pass = $('#pass').val();
-        if(!(name&&address&&age&&phone&&account&&pass)){
+        if(!(name&&address&&age&&phone&&pass)){
             Zepto.dialog({
                 type:'tips',
                 contentHtml:'参数不完整',
@@ -109,9 +88,8 @@
             return false;
         }
         $.ajax({
-            url:'/user/register',
+            url:'/user/doEditInfo',
             data:{
-                userName:account,
                 passWord:pass,
                 name:name,
                 address:address,
@@ -122,10 +100,10 @@
                 if (res.success){
                     Zepto.dialog({
                         type:'tips',
-                        contentHtml:'注册成功',
+                        contentHtml:'修改成功',
                         autoClose:2000,
                         onClosed:function () {
-                            location.href='/page/login'
+                            history.back(-1);
                         }
                     })
                 }
