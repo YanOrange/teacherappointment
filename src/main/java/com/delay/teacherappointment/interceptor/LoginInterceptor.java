@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
-//    @Autowired
-//    UserService userService;
+    @Autowired
+    UserService userService;
     Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
@@ -28,7 +28,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         User user = (User) session.getAttribute("user");
         if(user == null){
             user = new User();
-//            user = userService.findById(1);
+            user = userService.findById(1).orElse(null);
             session.setAttribute("user",user);
         }
         if(user!=null){

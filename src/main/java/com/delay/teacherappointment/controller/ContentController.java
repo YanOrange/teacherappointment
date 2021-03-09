@@ -20,16 +20,16 @@ import java.util.List;
 @RequestMapping("content")
 public class ContentController extends BaseController {
 
-//    @Autowired
-//    ContentService contentService;
+    @Autowired
+    ContentService contentService;
 
     @RequestMapping("findListByUserId")
     @ResponseBody
     public ExecuteResult findListByUserId() {
         User user = getUser();
-//        List<Content> list = contentService.findByUserId(user.getId());
-//        return ExecuteResult.ok(list);
-        return null;
+        List<Content> list = contentService.findByUserId(user.getId());
+        return ExecuteResult.ok(list);
+//        return null;
     }
 
 
@@ -38,7 +38,7 @@ public class ContentController extends BaseController {
     public ExecuteResult publish(Content content) {
         content.setCreateTime(new Date());
         content.setUser(getUser());
-//        contentService.saveAndFlush(content);
+        contentService.saveAndFlush(content);
         return ExecuteResult.ok();
     }
 

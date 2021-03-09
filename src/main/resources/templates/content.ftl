@@ -114,6 +114,35 @@
             z-index: 1;
             display: none;
         }
+        .warn{
+            border-radius: 50rem;
+            width:1rem;
+            height:1rem;
+            background: #ff5400;
+            opacity: 0.7;
+            color:#fff;
+            font-size: 0.25rem;
+            position: fixed;
+            bottom:2rem;
+            right:0.2rem;
+            text-align: center;
+            line-height:1rem;
+        }
+        .warn-content{
+            position: absolute;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            margin: auto;
+            width:5rem;
+            height:3rem;
+            background: #fff;
+            border:1px solid #ababab;
+            padding:1rem;
+            border-radius: 0.3rem;
+            display: none;
+        }
 
 
 
@@ -168,6 +197,15 @@
             </div>
         </div>
     </div>
+    <div class="warn">
+        举报
+    </div>
+    <div class="warn-content">
+        举报内容：
+        <input type="text" id="warn-content" placeholder="请输入举报内容">
+        <button onclick="warnCommit();">提交</button>
+        <button onclick="cancelCommit();">取消</button>
+    </div>
 
 </div>
 <div class="bottom-btn">
@@ -204,6 +242,36 @@
     $('.comment').on('click',function(){
         $('.write-comment-nav').show();
     })
+    $('.warn').on('click',function(){
+        $('.warn-content').show();
+    })
+    
+    function cancelCommit() {
+        $('.warn-content').hide();
+    }
+
+    /**
+     * 提交举报
+     * */
+    function warnCommit(){
+        var contentId = $('#contentId').val();
+        var content = $('#warn-content').val();
+        $.ajax({
+            url:'/warn/warnCommit',
+            data:{
+                content:content,
+                contentId:contentId
+            },
+            success:function (res){
+                if (res.success){
+                    alert("提交成功")
+                    $('#warn-content').hide();
+                } else{
+                    alert(res.msg)
+                }
+            }
+        })
+    }
 
     /**
      * 发表评论
@@ -212,7 +280,7 @@
         var contentId = $('#contentId').val();
         var comment = $('#comment').val();
         $.ajax({
-            url:'',
+            url:'/comment/commit',
             data:{
                 comment:comment,
                 contentId:contentId

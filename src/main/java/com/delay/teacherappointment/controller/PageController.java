@@ -74,6 +74,23 @@ public class PageController extends BaseController{
         return "publish";
     }
 
+    //会员列表
+    @RequestMapping("memberList")
+    public String memberList(){
+        return "admin/member-list";
+    }
+
+    //待审核列表
+    @RequestMapping("verifyList")
+    public String verifyList(){
+        return "admin/verify-list";
+    }
+
+    //举报列表
+    @RequestMapping("reportList")
+    public String reportList(){
+        return "admin/warn-list";
+    }
 
 
 
