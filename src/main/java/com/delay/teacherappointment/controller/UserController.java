@@ -66,4 +66,37 @@ public class UserController extends BaseController{
 
     }
 
+    @RequestMapping("ident")
+    @ResponseBody
+    public ExecuteResult ident(){
+        User user = getUser();
+//        User user1 = userService.findById(user.getId()).orElse(null);
+//        if(!user1.getStatus().equals(0)){
+//            return ExecuteResult.fail("已认证");
+//        }
+        return ExecuteResult.ok();
+    }
+
+    @RequestMapping("doGuardian")
+    @ResponseBody
+    public ExecuteResult doGuardian(){
+        User user = getUser();
+//        User user1 = userService.findById(user.getId()).orElse(null);
+//        user1.setStatus(1);
+//        userService.save(user1);
+        return ExecuteResult.ok();
+    }
+
+    @RequestMapping("doTeacher")
+    @ResponseBody
+    public ExecuteResult doTeacher(){
+        User user = getUser();
+//        User user1 = userService.findById(user.getId()).orElse(null);
+//        user1.setStatus(1);
+//        userService.save(user1);
+        return ExecuteResult.ok();
+    }
+
+
+
 }

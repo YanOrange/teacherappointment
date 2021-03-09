@@ -1,5 +1,7 @@
 package com.delay.teacherappointment.controller;
 
+import com.delay.teacherappointment.entity.User;
+import com.delay.teacherappointment.utils.ExecuteResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +16,7 @@ import java.lang.reflect.Array;
  */
 @Controller
 @RequestMapping("page")
-public class PageController {
+public class PageController extends BaseController{
 
     @RequestMapping("index")
     public String index(){
@@ -56,6 +58,23 @@ public class PageController {
     public String login(Model model){
         return "login";
     }
+
+    @RequestMapping("ident")
+    public String ident(){
+        return "ident";
+    }
+
+    @RequestMapping("teacher")
+    public String teacher(){
+        return "teacher";
+    }
+
+    @RequestMapping("publish")
+    public String publish(){
+        return "publish";
+    }
+
+
 
 
 

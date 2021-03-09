@@ -21,6 +21,7 @@
         body {
             -webkit-overflow-scrolling: touch;
         }
+
         html {
             background: #F2F2F2;
         }
@@ -299,8 +300,108 @@
             display: flex;
             justify-content: space-between;
         }
-        .slide-img{
+
+        .slide-img {
             border-radius: 0.3rem;
+        }
+
+        .content-list {
+
+        }
+
+        .content-list .item, .cinema-list-search .item {
+            width: 100%;
+            background: rgba(255, 255, 255, 1);
+            border-radius: 0.12rem;
+            padding: 0.3rem 0.2rem;
+            box-sizing: border-box;
+            margin-top: 0.2rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .title-warper {
+            display: flex;
+            /* justify-content: space-between; */
+            font-size: 0.3rem;
+            font-weight: bolder;
+            padding: 0.1rem 0;
+        }
+
+        .title-warper .title-left {
+            flex: 1;
+        }
+
+        .title-warper .del {
+            color: #999;
+            font-size: 0.22rem;
+            font-weight: 400;
+        }
+
+        .title-warper .del span {
+            text-decoration: line-through;
+        }
+
+        .title-warper .price {
+            color: #FD4B57;
+            font-size: 0.24rem;
+            font-weight: 400;
+        }
+
+        .title-warper .price .font {
+            font-size: 0.22rem;
+        }
+
+        .address {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.24rem;
+            color: rgba(102, 102, 102, 1);
+            padding: 0.1rem 0;
+        }
+
+        .address .address-left {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 55vw;
+        }
+
+        .distance {
+            width: 18vw;
+            text-align: right;
+        }
+
+        .support-tags {
+            padding: 0.1rem 0;
+        }
+
+        .support-tags span {
+            padding: 0 0.05rem;
+            font-size: 0.2rem;
+        }
+
+        .tag-orange {
+            color: #F99402;
+            border-radius: 0.03rem;
+            border: 0.01rem solid rgba(249, 148, 2, 0.4);
+        }
+
+        .tag-gray {
+            color: #626262;
+            border-radius: 0.03rem;
+            border: 0.01rem solid #C8C8C8;
+        }
+
+        .cinema-list .item:after, .cinema-list-search .item:after {
+            border-bottom: 1px solid #DDE7E9;
+            content: '';
+            position: absolute;
+            width: 95%;
+            bottom: 0;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
         }
     </style>
 </head>
@@ -343,22 +444,22 @@
 
     <div class="item-box margin-top">
         <div class="class-box">
-            <a href="/page/appointment">
+            <a href="/page/type">
                 <div class="class-item">
                     <img src="/img/enter.png">
-                    <span class="class-name">预约家教入口</span>
+                    <span class="class-name">预约家教列表</span>
                 </div>
             </a>
-            <a href="/page/myOrder">
+            <a href="/page/contentList">
                 <div class="class-item">
                     <img src="/img/show.png">
-                    <span class="class-name">查看预约结果入口</span>
+                    <span class="class-name">查看我的发布</span>
                 </div>
             </a>
-            <a href="/page/classRoomList">
+            <a href="/page/publish">
                 <div class="class-item">
                     <img src="/img/search.png">
-                    <span class="class-name">教室空余查询</span>
+                    <span class="class-name">发布预约</span>
                 </div>
             </a>
         </div>
@@ -368,39 +469,61 @@
         <span class="recommend">推荐</span>
     </div>
     <div class="item-box" style="margin-top:0.3rem;">
-        <div class="part waterfall-list">
-            <#if list??>
-                <#list list as room>
-                <div class="item">
-                    <a href="">
-                        <div class="content">
-                            <div class="img-container">
-                                <div class="img">
-                                    <img class="p-img" src="${room.imgUrl}">
-                                </div>
-                            </div>
-                            <div class="info">
-                                <div class="title">${room.name}</div>
-                                <div class="tag-box">
-                                    <div class="tag">空闲</div>
-                                    <div class="tag">精选</div>
-                                </div>
-                                <div class="bottom-price">
-                                    <div class="price">
-                                        可预约
-                                    </div>
-                                    <#--<div class="addCart">-->
-                                        <#--<div class="heng"></div>-->
-                                        <#--<div class="shu"></div>-->
-                                    <#--</div>-->
-                                </div>
-
-                            </div>
-                        </div>
-                    </a>
+        <div class="content-list">
+            <div class="item">
+                <div class="title-warper">
+                    <div class="title-left">
+                        <span>课程名称</span>
+                    </div>
+                    <div class="del">
+                        <span>￥35</span>
+                    </div>
+                    <div class="price">
+                        <span>￥35</span>
+                        <span class="font">起</span>
+                    </div>
                 </div>
-                </#list>
-            </#if>
+                <div class="address">
+                    <div class="address-left">
+                        <span>简介简介简介简介简介简介适合小学一年级</span>
+                    </div>
+                    <div class="distance">
+                        <span>博士</span>
+                        <span>求助帖</span>
+                    </div>
+                </div>
+                <div class="support-tags">
+                    <span class="tag-orange">优质教师</span>
+                    <span class="tag-gray">耐心</span>
+                </div>
+            </div>
+            <div class="item">
+                <div class="title-warper">
+                    <div class="title-left">
+                        <span>课程名称</span>
+                    </div>
+                    <div class="del">
+                        <span>￥35</span>
+                    </div>
+                    <div class="price">
+                        <span>￥35</span>
+                        <span class="font">起</span>
+                    </div>
+                </div>
+                <div class="address">
+                    <div class="address-left">
+                        <span>简介简介简介简介简介简介适合小学一年级</span>
+                    </div>
+                    <div class="distance">
+                        <span>博士</span>
+                        <span>家教贴</span>
+                    </div>
+                </div>
+                <div class="support-tags">
+                    <span class="tag-orange">优质教师</span>
+                    <span class="tag-gray">耐心</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>

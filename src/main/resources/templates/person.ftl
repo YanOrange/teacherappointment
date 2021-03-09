@@ -140,7 +140,17 @@
 
     //认证身份
     $('#auth').on('click',function () {
-        location.href="/page/editInfo";
+        $.ajax({
+            url:'/user/ident',
+            dataType:'json',
+            success:function(res){
+                if(res.success){
+                    location.href='/page/ident';
+                }else{
+                    alert(res.msg)
+                }
+            }
+        })
     });
 
     function exit() {
@@ -152,12 +162,5 @@
         })
     }
 </script>
-<script type="text/javascript">
-    $('#fileBtn').on('change',function (res) {
-        upload22();
-    })
-    function upload22() {
-        $("#form2").submit();
-    }
-</script>
+
 </html>

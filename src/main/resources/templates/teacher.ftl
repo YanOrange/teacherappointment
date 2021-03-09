@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="grey"/>
     <meta name="format-detection" content="telephone=no,address=no,email=no"/>
-    <title>认证</title>
+    <title>认证教师</title>
     <script>
         var deviceWidth = document.documentElement.clientWidth;
         if (deviceWidth > 640) deviceWidth = 640;
@@ -59,41 +59,33 @@
     <!--表单-->
     <div class="form">
         <div class="input-group border-1px-bottom">
-            <div class="tit">身份证号</div>
-            <input type="tel" placeholder="请输入身份证号" value="" id="idCard">
+            <div class="tit">毕业院校</div>
+            <input type="tel" placeholder="请输入毕业院校" value="" id="school">
+        </div>
+        <div class="input-group border-1px-bottom">
+            <div class="tit">学历</div>
+            <input type="tel" placeholder="请输入学历" value="" id="education">
+        </div>
+        <div class="input-group border-1px-bottom">
+            <div class="tit">学位证编号</div>
+            <input type="tel" placeholder="请输入学位证编号" value="" id="eduNo">
         </div>
     </div>
     <!--底部工具栏-->
     <div class="global-footer for-edit">
         <!-- <button class="btn btn-primary btn-full">保存并使用</button> -->
-        <button class="btn btn-primary btn-full" id="submit" onclick="teacher();">认证教师</button>
-        <button class="btn btn-primary btn-full" id="submit" onclick="guardian();">认证监护人</button>
+        <button class="btn btn-primary btn-full" id="submit" onclick="register();">开始认证</button>
     </div>
 </div>
 <script src="../js/lib/zepto.js"></script>
 <script src="../js/jquery-2.1.1.min.js"></script>
 <script src="../js/plugins/dialog.js"></script>
 <script>
-    function teacher() {
-        var idCard = $('#idCard').val();
-
-        if(!idCard){
-            Zepto.dialog({
-                type:'tips',
-                contentHtml:'参数不完整',
-                autoClose:2000
-            })
-            return false;
-        }
-
-        location.href='/page/teacher';
-
-    }
-
-    function guardian() {
-        var idCard = $('#idCard').val();
-
-        if(!idCard){
+    function register() {
+        var school = $('#school').val();
+        var education = $('#education').val();
+        var eduNo = $('#eduNo').val();
+        if(!(school&&education&&eduNo)){
             Zepto.dialog({
                 type:'tips',
                 contentHtml:'参数不完整',
@@ -102,9 +94,11 @@
             return false;
         }
         $.ajax({
-            url:'/user/doGuardian',
+            url:'/user/doTeacher',
             data:{
-                idCard:idCard
+                school:school,
+                education:education,
+                eduNo:eduNo
             },
             success:function (res) {
                 if (res.success){
@@ -113,7 +107,7 @@
                         contentHtml:'认证申请提交成功',
                         autoClose:2000,
                         onClosed:function () {
-                            history.back(-1);
+                            location.href='/page/person';
                         }
                     })
                 }

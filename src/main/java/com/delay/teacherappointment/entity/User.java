@@ -1,6 +1,8 @@
 package com.delay.teacherappointment.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,6 +24,8 @@ public class User {
 
     private String passWord;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
     private String name;
@@ -34,11 +38,13 @@ public class User {
 
     private String idCard;
 
-    private Integer status;//0 未认证 1 已认证
+    private Integer status;//0 未认证 1认证中  2已认证
 
     private String school;//毕业院校
 
     private String education;//学历
+
+    private String eduNo;//学位证编号
 
     private Integer invalid;//失效用户 0否 1是
 
