@@ -20,6 +20,10 @@ import java.util.Date;
 @Data
 public class Content {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private String title;
 
     private String content;//内容

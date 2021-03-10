@@ -4,11 +4,14 @@ import com.delay.teacherappointment.entity.User;
 import com.delay.teacherappointment.utils.ExecuteResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.rmi.server.UnicastServerRef2;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author 闫金柱
@@ -18,30 +21,31 @@ import java.util.Date;
 @RequestMapping("user")
 public class UserController extends BaseController{
 
-//    @Autowired
-//    UserRepository userService;
+    @Autowired
+    UserRepository userService;
 
     @RequestMapping("register")
     @ResponseBody
     public ExecuteResult register(User user){
-//        User user2 = userService.findByUserName(user.getUserName());
-//        if(user2!=null){
-//            return ExecuteResult.fail(1,"该账号已存在");
-//        }
+        User user2 = userService.findByUserName(user.getUserName());
+        if(user2!=null){
+            return ExecuteResult.fail(1,"该账号已存在");
+        }
         user.setCreateTime(new Date());
         user.setInvalid(0);
-//        userService.saveAndFlush(user);
+        user.setReport(0);
+        userService.saveAndFlush(user);
         return ExecuteResult.ok();
     }
 
     @RequestMapping("login")
     @ResponseBody
     public ExecuteResult login (String userName, String passWord, HttpSession session){
-//        User user = userService.findByUserNameAndPassWord(userName,passWord);
-//        if(user!=null){
-//            session.setAttribute("user",user);
-//            return ExecuteResult.ok();
-//        }
+        User user = userService.findByUserNameAndPassWord(userName,passWord);
+        if(user!=null){
+            session.setAttribute("user",user);
+            return ExecuteResult.ok();
+        }
         return ExecuteResult.fail("账号或密码不正确");
     }
 
@@ -54,10 +58,10 @@ public class UserController extends BaseController{
     @ResponseBody
     public ExecuteResult doEditInfo(User user){
 
-//        User comAuthor = userService.findById(user.getId()).orElse(null);
-//        BeanUtils.copyProperties(user,comAuthor,"createTime","status","userName","idCard","school","education","invalid");
-//        userService.saveAndFlush(comAuthor);
-//        getSession().setAttribute("user",comAuthor);
+        User comAuthor = userService.findById(user.getId()).orElse(null);
+        BeanUtils.copyProperties(user,comAuthor,"createTime","status","userName","idCard","school","education","invalid","report","isTeacher");
+        userService.saveAndFlush(comAuthor);
+        getSession().setAttribute("user",comAuthor);
         return ExecuteResult.ok();
 
     }
@@ -66,10 +70,10 @@ public class UserController extends BaseController{
     @ResponseBody
     public ExecuteResult ident(){
         User user = getUser();
-//        User user1 = userService.findById(user.getId()).orElse(null);
-//        if(!user1.getStatus().equals(0)){
-//            return ExecuteResult.fail("已认证");
-//        }
+        User user1 = userService.findById(user.getId()).orElse(null);
+        if(!user1.getStatus().equals(0)){
+            return ExecuteResult.fail("已认证");
+        }
         return ExecuteResult.ok();
     }
 
@@ -77,20 +81,82 @@ public class UserController extends BaseController{
     @ResponseBody
     public ExecuteResult doGuardian(){
         User user = getUser();
-//        User user1 = userService.findById(user.getId()).orElse(null);
-//        user1.setStatus(1);
-//        userService.save(user1);
+        User user1 = userService.findById(user.getId()).orElse(null);
+        user1.setStatus(1);
+        user1.setIsTeacher(0);
+        userService.save(user1);
         return ExecuteResult.ok();
     }
 
     @RequestMapping("doTeacher")
     @ResponseBody
-    public ExecuteResult doTeacher(){
+    public ExecuteResult doTeacher(String school,String education,String eduNo){
         User user = getUser();
-//        User user1 = userService.findById(user.getId()).orElse(null);
-//        user1.setStatus(1);
-//        userService.save(user1);
+        User user1 = userService.findById(user.getId()).orElse(null);
+        user1.setStatus(1);
+        user1.setSchool(school);
+        user1.setEducation(education);
+        user1.setEduNo(eduNo);
+        user1.setIsTeacher(1);
+        userService.save(user1);
         return ExecuteResult.ok();
+    }
+
+    @RequestMapping("delete")
+    @ResponseBody
+    public ExecuteResult delete(@RequestBody List<Integer> userIds){
+        userIds.stream().forEach(o->{
+
+            User user = userService.findById(o).orElse(null);
+            user.setInvalid(1);
+            userService.saveAndFlush(user);
+        });
+        return ExecuteResult.ok();
+    }
+
+
+    /**
+     * 查询全部
+     * @return
+     */
+    @RequestMapping("findAll")
+    @ResponseBody
+    public ExecuteResult findAll(){
+        List<User> list = userService.findByInvalid(0);
+        return ExecuteResult.ok(list);
+    }
+
+    /**
+     * 设置审核状态
+     * @param userId
+     * @param state
+     * @return
+     */
+    @RequestMapping("setState")
+    @ResponseBody
+    public ExecuteResult setState(Integer userId,Integer state){
+        User user = userService.findById(userId).orElse(null);
+        user.setStatus(state);
+        userService.saveAndFlush(user);
+        return ExecuteResult.ok();
+    }
+
+    /**
+     * 通过状态查询全部
+     * @return
+     */
+    @RequestMapping("findAllByStatus")
+    @ResponseBody
+    public ExecuteResult findAllByStatus(Integer status){
+        List<User> list = userService.findByStatus(status);
+        return ExecuteResult.ok(list);
+    }
+
+    @RequestMapping("findByReport")
+    @ResponseBody
+    public ExecuteResult reportList(){
+        List<User> users = userService.findByReport(1);
+        return ExecuteResult.ok(users);
     }
 
 
