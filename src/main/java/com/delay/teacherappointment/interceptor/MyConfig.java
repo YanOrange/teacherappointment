@@ -29,7 +29,7 @@ public class MyConfig implements WebMvcConfigurer {
 //                .excludePathPatterns("/lib/**")
 //                .excludePathPatterns("/scss/**");
 
-        //管理后台登陆
+
         registry.addInterceptor(loginInterceptor).addPathPatterns(
                 "/**"
         ).excludePathPatterns(
@@ -37,6 +37,21 @@ public class MyConfig implements WebMvcConfigurer {
                 "/page/register",
                 "/user/register",
                 "/user/login",
+                "/css/**",
+                "/js/**",
+                "/font/**",
+                "/img/**",
+                "/res/**",
+                "/images/**",
+                "/lib/**",
+                "/scss/**",
+                "/page/managerIndex"
+        );
+
+        //管理后台登陆
+        registry.addInterceptor(adminInterceptor).addPathPatterns(
+                "/page/managerIndex"
+        ).excludePathPatterns(
                 "/css/**",
                 "/js/**",
                 "/font/**",
