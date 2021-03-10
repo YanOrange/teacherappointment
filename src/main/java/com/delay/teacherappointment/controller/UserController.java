@@ -1,11 +1,7 @@
 package com.delay.teacherappointment.controller;
 
 import com.delay.teacherappointment.entity.User;
-import com.delay.teacherappointment.repository.UserRepository;
-import com.delay.teacherappointment.service.UserService;
 import com.delay.teacherappointment.utils.ExecuteResult;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
