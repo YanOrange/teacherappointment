@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 闫金柱
@@ -35,6 +36,13 @@ public class CommentController extends BaseController{
         comment1.setUser(getUser());
         commentService.saveAndFlush(comment1);
         return ExecuteResult.ok();
+    }
+
+    @RequestMapping("findAll")
+    @ResponseBody
+    public ExecuteResult findAll(Integer contentId){
+        List<Comment> list = commentService.findByContentId(contentId);
+        return ExecuteResult.ok(list);
     }
 
 }

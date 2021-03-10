@@ -169,6 +169,12 @@
                             history.back(-1)
                         }
                     })
+                }else{
+                    Zepto.dialog({
+                        type: 'tips',
+                        contentHtml: res.msg,
+                        autoClose: 2000
+                    })
                 }
             }
         })

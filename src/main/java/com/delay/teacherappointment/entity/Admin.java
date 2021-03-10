@@ -12,7 +12,7 @@ import java.util.Date;
  * @create 2021-3-10 16:29
  */
 @Entity
-@Table(name = "t_comment")
+@Table(name = "t_admin")
 @Data
 public class Admin {
 

@@ -67,8 +67,8 @@ public class UserController extends BaseController{
     @ResponseBody
     public ExecuteResult doEditInfo(User user){
 
-        User comAuthor = userService.findById(user.getId()).orElse(null);
-        BeanUtils.copyProperties(user,comAuthor,"createTime","status","userName","idCard","school","education","invalid","report","isTeacher");
+        User comAuthor = userService.findById(getUser().getId()).orElse(null);
+        BeanUtils.copyProperties(user,comAuthor,"id","createTime","status","userName","idCard","school","education","invalid","report","isTeacher");
         userService.saveAndFlush(comAuthor);
         getSession().setAttribute("user",comAuthor);
         return ExecuteResult.ok();
@@ -80,7 +80,9 @@ public class UserController extends BaseController{
     public ExecuteResult ident(){
         User user = getUser();
         User user1 = userService.findById(user.getId()).orElse(null);
-        if(!user1.getStatus().equals(0)){
+        if(user1.getStatus().equals(1)){
+            return ExecuteResult.fail("正在认证中");
+        }else if(user1.getStatus().equals(2)){
             return ExecuteResult.fail("已认证");
         }
         return ExecuteResult.ok();
@@ -197,7 +199,7 @@ public class UserController extends BaseController{
      * 删除管理用户
      * @return
      */
-    @RequestMapping("`deleteAdmin`")
+    @RequestMapping("deleteAdmin")
     @ResponseBody
     public ExecuteResult deleteAdmin(@RequestBody List<Integer> userIds){
         userIds.stream().forEach(o->{

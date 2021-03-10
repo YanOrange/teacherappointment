@@ -542,37 +542,37 @@
                     var data = res.data;
                     var html = '';
                     $.each(data, function (i, r) {
-                        html += '<div class="item">\n' +
-                            '            <div class="title-warper">\n' +
-                            '                <div class="title-left">\n' +
-                            '                    <span>' + r.title + '</span>\n' +
-                            '                </div>\n' +
-                            '                <div class="del">\n' +
-                            '                    <span>￥' + r.price + '</span>\n' +
-                            '                </div>\n' +
-                            '                <div class="price">\n' +
-                            '                    <span>￥' + r.price + '</span>\n' +
-                            '                    <span class="font">起</span>\n' +
-                            '                </div>\n' +
-                            '            </div>\n' +
-                            '            <div class="address">\n' +
-                            '                <div class="address-left">\n' +
-                            '                    <span>' + r.description + '</span>\n' +
-                            '                </div>\n' +
-                            '                <div class="distance">\n' +
-                            '                    <span>' + r.user.education + '</span>\n';
+                        html += '<a href="/page/content?contentId='+r.id+'"><div class="item">\n' +
+                                '            <div class="title-warper">\n' +
+                                '                <div class="title-left">\n' +
+                                '                    <span>' + r.title + '</span>\n' +
+                                '                </div>\n' +
+                                '                <div class="del">\n' +
+                                '                    <span>￥' + r.price + '</span>\n' +
+                                '                </div>\n' +
+                                '                <div class="price">\n' +
+                                '                    <span>￥' + r.price + '</span>\n' +
+                                '                    <span class="font">起</span>\n' +
+                                '                </div>\n' +
+                                '            </div>\n' +
+                                '            <div class="address">\n' +
+                                '                <div class="address-left">\n' +
+                                '                    <span>' + r.description + '</span>\n' +
+                                '                </div>\n' +
+                                '                <div class="distance">\n' +
+                                '                    <span>' + r.user.education + '</span>\n';
                         if (r.status == 0) {
                             html += '                    <span>家教帖</span>\n';
                         } else {
                             html += '                    <span>求助帖</span>\n';
                         }
                         html += '                </div>\n' +
-                            '            </div>\n' +
-                            '            <div class="support-tags">\n' +
-                            '                <span class="tag-orange">优质教师</span>\n' +
-                            '                <span class="tag-gray">耐心</span>\n' +
-                            '            </div>\n' +
-                            '        </div>';
+                                '            </div>\n' +
+                                '            <div class="support-tags">\n' +
+                                '                <span class="tag-orange">优质教师</span>\n' +
+                                '                <span class="tag-gray">耐心</span>\n' +
+                                '            </div>\n' +
+                                '        </div></a>';
                     })
                     $('.content-list').html(html);
                 } else {

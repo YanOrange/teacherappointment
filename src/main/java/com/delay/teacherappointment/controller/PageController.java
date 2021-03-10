@@ -1,6 +1,9 @@
 package com.delay.teacherappointment.controller;
 
+import ch.qos.logback.core.rolling.helper.IntegerTokenConverter;
+import com.delay.teacherappointment.entity.Content;
 import com.delay.teacherappointment.entity.User;
+import com.delay.teacherappointment.service.ContentService;
 import com.delay.teacherappointment.service.UserService;
 import com.delay.teacherappointment.utils.ExecuteResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,8 @@ public class PageController extends BaseController{
 
     @Autowired
     UserService userService;
+    @Autowired
+    ContentService contentService;
 
     @RequestMapping("index")
     public String index(){
@@ -34,7 +39,9 @@ public class PageController extends BaseController{
     }
 
     @RequestMapping("content")
-    public String content(){
+    public String content(Integer contentId,Model model){
+        Content content = contentService.findById(contentId).orElse(null);
+        model.addAttribute("content",content);
         return "content";
     }
 

@@ -53,9 +53,9 @@ public class WarnController extends BaseController{
 
     @RequestMapping("pass")
     @ResponseBody
-    public ExecuteResult pass(Integer id){
+    public ExecuteResult pass(Integer warnId){
 
-        Warn warn = warnService.findById(id).orElse(null);
+        Warn warn = warnService.findById(warnId).orElse(null);
         Integer userId = warn.getUser().getId();
         User user = userService.findById(userId).orElse(null);
         user.setInvalid(1);
@@ -68,8 +68,8 @@ public class WarnController extends BaseController{
 
     @RequestMapping("refuse")
     @ResponseBody
-    public ExecuteResult refuse(Integer id){
-        warnService.deleteById(id);
+    public ExecuteResult refuse(Integer warnId){
+        warnService.deleteById(warnId);
         return ExecuteResult.ok();
 
     }

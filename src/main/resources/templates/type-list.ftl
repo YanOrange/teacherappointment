@@ -209,11 +209,14 @@
         $('.type-list').on('click', 'li', function () {
             $(this).siblings().removeClass('active');
             $(this).addClass('active');
-            var typeid = $(this).data('typeid')
+            var typeid = $(this).data('type')
+            console.log(typeid);
             getContent(typeid);
         })
         getContent(0);
     })
+
+
 
     $('.global-header').on('click', '#slideType', function () {
 
@@ -247,7 +250,7 @@
                     var data = res.data;
                     var html = '';
                     $.each(data, function (i, r) {
-                        html += '<div class="item">\n' +
+                        html += '<a href="/page/content?contentId='+r.id+'"><div class="item">\n' +
                             '            <div class="title-warper">\n' +
                             '                <div class="title-left">\n' +
                             '                    <span>' + r.title + '</span>\n' +
@@ -277,7 +280,7 @@
                             '                <span class="tag-orange">优质教师</span>\n' +
                             '                <span class="tag-gray">耐心</span>\n' +
                             '            </div>\n' +
-                            '        </div>';
+                            '        </div></a>';
                     })
                     $('.content-list').html(html);
                 } else {

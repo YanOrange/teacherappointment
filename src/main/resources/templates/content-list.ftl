@@ -222,21 +222,7 @@
 
 
 </div>
-<!--底部工具栏-->
-<div class="global-footer">
-    <a href="/page/index" class="home active">
-        <div class="img"><img src="../img/icons/home-active.png"></div>
-        <div class="text">首页</div>
-    </a>
-    <a href="/page/type" class="home">
-        <div class="img"><img src="../img/icons/home-active.png"></div>
-        <div class="text">分类</div>
-    </a>
-    <a href="/page/person" class="home">
-        <div class="img"><img src="../img/icons/my.png"></div>
-        <div class="text">个人中心</div>
-    </a>
-</div>
+
 <script src="../js/lib/zepto.js"></script>
 <script src="../js/lib/jquery-2.1.1.min.js"></script>
 <script src="../js/lib/fastclick.js"></script>
@@ -261,33 +247,37 @@
                     var data = res.data;
                     var html = '';
                     $.each(data, function (i, r) {
-                        html += '<div class="item">\n' +
-                            '            <div class="title-warper">\n' +
-                            '                <div class="title-left">\n' +
-                            '                    <span>课程名称</span>\n' +
-                            '                </div>\n' +
-                            '                <div class="del">\n' +
-                            '                    <span>￥35</span>\n' +
-                            '                </div>\n' +
-                            '                <div class="price">\n' +
-                            '                    <span>￥35</span>\n' +
-                            '                    <span class="font">起</span>\n' +
-                            '                </div>\n' +
-                            '            </div>\n' +
-                            '            <div class="address">\n' +
-                            '                <div class="address-left">\n' +
-                            '                    <span>简介简介简介简介简介简介适合小学一年级</span>\n' +
-                            '                </div>\n' +
-                            '                <div class="distance">\n' +
-                            '                    <span>博士</span>\n' +
-                            '                    <span>学历</span>\n' +
-                            '                </div>\n' +
-                            '            </div>\n' +
-                            '            <div class="support-tags">\n' +
-                            '                <span class="tag-orange">优质教师</span>\n' +
-                            '                <span class="tag-gray">耐心</span>\n' +
-                            '            </div>\n' +
-                            '        </div>';
+                        html += '<a href="/page/content?contentId='+r.id+'"><div class="item">\n' +
+                                '            <div class="title-warper">\n' +
+                                '                <div class="title-left">\n' +
+                                '                    <span>' + r.title + '</span>\n' +
+                                '                </div>\n' +
+                                '                <div class="del">\n' +
+                                '                    <span>￥' + r.price + '</span>\n' +
+                                '                </div>\n' +
+                                '                <div class="price">\n' +
+                                '                    <span>￥' + r.price + '</span>\n' +
+                                '                    <span class="font">起</span>\n' +
+                                '                </div>\n' +
+                                '            </div>\n' +
+                                '            <div class="address">\n' +
+                                '                <div class="address-left">\n' +
+                                '                    <span>' + r.description + '</span>\n' +
+                                '                </div>\n' +
+                                '                <div class="distance">\n' +
+                                '                    <span>' + r.user.education + '</span>\n';
+                        if (r.status == 0) {
+                            html += '                    <span>家教帖</span>\n';
+                        } else {
+                            html += '                    <span>求助帖</span>\n';
+                        }
+                        html += '                </div>\n' +
+                                '            </div>\n' +
+                                '            <div class="support-tags">\n' +
+                                '                <span class="tag-orange">优质教师</span>\n' +
+                                '                <span class="tag-gray">耐心</span>\n' +
+                                '            </div>\n' +
+                                '        </div></a>';
                     })
                     $('.content-list').html(html);
                 } else {

@@ -3,6 +3,7 @@ package com.delay.teacherappointment.controller;
 import com.delay.teacherappointment.entity.Content;
 import com.delay.teacherappointment.entity.User;
 import com.delay.teacherappointment.service.ContentService;
+import com.delay.teacherappointment.service.UserService;
 import com.delay.teacherappointment.utils.ExecuteResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,8 @@ public class ContentController extends BaseController {
 
     @Autowired
     ContentService contentService;
+    @Autowired
+    UserService userService;
 
     /**
      * 用户文章列表
@@ -75,10 +78,17 @@ public class ContentController extends BaseController {
     @RequestMapping("publish")
     @ResponseBody
     public ExecuteResult publish(Content content) {
+        User user = userService.findById(getUser().getId()).orElse(null);
+        if(content.getStatus().equals(0)){
+            if(!user.getIsTeacher().equals(1)){
+                return ExecuteResult.fail("您没有通过教师认证");
+            }
+        }
         content.setCreateTime(new Date());
         content.setUser(getUser());
         contentService.saveAndFlush(content);
         return ExecuteResult.ok();
+
     }
 
 

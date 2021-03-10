@@ -57,7 +57,7 @@
                                     time: 2000,  //关闭时间为2s
                                     // offset: ['90px', '900px']//自定义位置
                                 },function () {
-                                    location.href = '/page/index'
+                                    location.href = '/page/managerIndex'
                                 })
                             }else{
                                 layer.msg(res.msg,{

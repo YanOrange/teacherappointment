@@ -156,31 +156,31 @@
         <div class="center-area">课程详情</div>
     </header>
     <div class="title">
-        课程名称课程名称
+        ${content.title!''}
     </div>
     <div class="teacher-name">
-        <span>教师名</span>
-        <span style="margin-left:0.2rem;">学历</span>
-        <span style="margin-left:0.2rem;">适合一年级</span>
+        <span>${user.name!''}</span>
+        <span style="margin-left:0.2rem;">${user.education!''}</span>
+        <span style="margin-left:0.2rem;">适合${content.fit!''}</span>
     </div>
     <div class="description">
-        简介：<span>简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</span>
-    </div>
-
-    <div class="description">
-        费用：<span>70</span>元/小时
+        简介：<span>${content.description!''}</span>
     </div>
 
     <div class="description">
-        联系方式：<span>17600552852</span>
+        费用：<span>${content.price!''}</span>元/小时
     </div>
 
     <div class="description">
-        家庭住址：<span>XXXXXXXXXXXXXXX</span>
+        联系方式：<span>${content.phone!''}</span>
     </div>
 
     <div class="description">
-        教学详情：<span>教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情教学详情</span>
+        家庭住址：<span>${content.address!''}</span>
+    </div>
+
+    <div class="description">
+        教学详情：<span>${content.content!''}</span>
     </div>
 
     <div class="comment-nav">
@@ -210,7 +210,7 @@
 </div>
 <div class="bottom-btn">
     <a class="comment">留言</a>
-    <a class="appointment" href="tel:17600449652">电话预约</a>
+    <a class="appointment" href="tel:${content.phone!''}">电话预约</a>
 </div>
 <div class="write-comment-nav">
     <dvi class="write-comment">
@@ -223,7 +223,7 @@
         <button onclick="comment();">提交</button>
     </dvi>
 </div>
-<#--<input type="hidden" value="${content.id!''}">-->
+<input type="hidden" value="${content.id!''}" id="contentId">
 <script src="../js/lib/zepto.js"></script>
 <script src="../js/lib/jquery-2.1.1.min.js"></script>
 <script src="../js/plugins/dialog.js"></script>
@@ -231,8 +231,30 @@
 <script>
     $(function () {
 
-
+        findAllComment();
     })
+
+    function findAllComment(){
+        var contentId = $('#contentId').val();
+        $.ajax({
+            url:'/comment/findAll',
+            data:{
+                contentId:contentId
+            },
+            success:function (res) {
+                if (res.success){
+                    var html='';
+                    $.each(res.data,function (i, r) {
+                        html +='<div class="comment-content">\n' +
+                                '                <span>'+r.user.name+'</span>:<span>'+r.comment+'</span>\n' +
+                                '            </div>';
+                    })
+                    $('.comment-list').html(html);
+                }
+            }
+        })
+
+    }
 
     $('.write-comment-nav').on('click',function(){
         if(event.target!=this) return;

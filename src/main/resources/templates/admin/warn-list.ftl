@@ -204,10 +204,10 @@
 </script>
 <script type="text/html" id="barTeacher">
     <a title="通过" onclick="pass({{d.id}})" href="javascript:;">
-        <i class="layui-icon">&#xe640;</i>
+        通过
     </a>
     <a title="拒绝" onclick="refuse({{d.id}})" href="javascript:;">
-        <i class="layui-icon">&#xe640;</i>
+        拒绝
     </a>
 </script>
 

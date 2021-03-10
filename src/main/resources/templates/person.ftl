@@ -83,7 +83,11 @@
         ${user.phone!'xxx'}
     </div>
         <div class="record" style="bottom: 1rem;">
-            学生<i class="icons-right"></i>
+            <#if user.isTeacher==1>
+                教师
+            <#else>
+                普通用户
+            </#if><i class="icons-right"></i>
         </div>
         <div class="record">
             <a href="javascript:;" onclick="exit();">退出登录</a>

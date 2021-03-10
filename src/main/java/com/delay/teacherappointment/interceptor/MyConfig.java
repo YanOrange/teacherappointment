@@ -29,26 +29,7 @@ public class MyConfig implements WebMvcConfigurer {
 //                .excludePathPatterns("/lib/**")
 //                .excludePathPatterns("/scss/**");
 
-
-        registry.addInterceptor(loginInterceptor).addPathPatterns(
-                "/**"
-        ).excludePathPatterns(
-                "/page/login",
-                "/page/register",
-                "/user/register",
-                "/user/login",
-                "/css/**",
-                "/js/**",
-                "/font/**",
-                "/img/**",
-                "/res/**",
-                "/images/**",
-                "/lib/**",
-                "/scss/**",
-                "/page/managerIndex"
-        );
-
-        //管理后台登陆
+//管理后台登陆
         registry.addInterceptor(adminInterceptor).addPathPatterns(
                 "/page/managerIndex"
         ).excludePathPatterns(
@@ -61,6 +42,44 @@ public class MyConfig implements WebMvcConfigurer {
                 "/lib/**",
                 "/scss/**"
         );
+
+        registry.addInterceptor(loginInterceptor).addPathPatterns(
+                "/**"
+        ).excludePathPatterns(
+                "/page/managerLogin",
+                "/page/login",
+                "/page/register",
+                "/user/register",
+                "/user/login",
+                "/css/**",
+                "/js/**",
+                "/font/**",
+                "/img/**",
+                "/res/**",
+                "/images/**",
+                "/lib/**",
+                "/scss/**",
+                "/page/managerIndex",
+                "/login/doLogin",
+                "/page/welcome",
+                "/user/delete",
+                "/user/findAll",
+                "/user/setState",
+                "/user/findAllByStatus",
+                "/user/add",
+                "/user/deleteAdmin",
+                "/page/memberList",
+                "/page/verifyList",
+                "/page/reportList",
+                "/page/add",
+                "/warn/findAll",
+                "/warn/refuse",
+                "/warn/pass"
+
+
+        );
+
+
 
         // 拦截配置
 //        registry.addInterceptor(loginInterceptor).addPathPatterns("/**")

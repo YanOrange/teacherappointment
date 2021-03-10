@@ -60,23 +60,23 @@
     <div class="form">
         <div class="input-group border-1px-bottom">
             <div class="tit">密码</div>
-            <input type="passWord" placeholder="请输入密码" value="" id="pass">
+            <input type="passWord" placeholder="请输入密码" value="${user.passWord!''}" id="pass">
         </div>
         <div class="input-group border-1px-bottom">
             <div class="tit">姓名</div>
-            <input type="tel" placeholder="请输入姓名" value="" id="name">
+            <input type="tel" placeholder="请输入姓名" value="${user.name!''}" id="name">
         </div>
         <div class="input-group border-1px-bottom">
             <div class="tit">年龄</div>
-            <input type="tel" placeholder="请输入年龄" value="" id="age">
+            <input type="tel" placeholder="请输入年龄" value="${user.age!''}" id="age">
         </div>
         <div class="input-group border-1px-bottom">
             <div class="tit">地址</div>
-            <input type="tel" placeholder="请输入地址" value="" id="address">
+            <input type="tel" placeholder="请输入地址" value="${user.address!''}" id="address">
         </div>
         <div class="input-group border-1px-bottom">
             <div class="tit">联系方式</div>
-            <input type="tel" placeholder="请输入手机号码" value="" id="phone">
+            <input type="tel" placeholder="请输入手机号码" value="${user.phone!''}" id="phone">
         </div>
     </div>
     <!--底部工具栏-->
