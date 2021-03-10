@@ -1,7 +1,9 @@
 package com.delay.teacherappointment.controller;
 
 import com.delay.teacherappointment.entity.User;
+import com.delay.teacherappointment.service.UserService;
 import com.delay.teacherappointment.utils.ExecuteResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,9 @@ import java.lang.reflect.Array;
 @Controller
 @RequestMapping("page")
 public class PageController extends BaseController{
+
+    @Autowired
+    UserService userService;
 
     @RequestMapping("index")
     public String index(){
@@ -71,9 +76,16 @@ public class PageController extends BaseController{
 
     @RequestMapping("publish")
     public String publish(){
+
+
         return "publish";
     }
 
+
+    @RequestMapping("managerIndex")
+    public String managerIndex(){
+        return "admin/index";
+    }
     //会员列表
     @RequestMapping("memberList")
     public String memberList(){
@@ -92,9 +104,28 @@ public class PageController extends BaseController{
         return "admin/warn-list";
     }
 
+    /**
+     *欢迎页面
+     * @return
+     */
+    @RequestMapping("welcome")
+    public String welcome(){
+        return "admin/welcome";
+    }
 
+    /**
+     * 新增用户
+     * @return
+     */
+    @RequestMapping("add")
+    public String add(Model model){
+        return "admin/person-add";
+    }
 
-
+    @RequestMapping("managerLogin")
+    public String managerLogin(){
+        return "admin/login";
+    }
 
 
 }

@@ -50,6 +50,4 @@ public class User {
 
     private Integer isTeacher;//1 是  0否
 
-    private Integer report;//0 正常 1正在举报
-
 }

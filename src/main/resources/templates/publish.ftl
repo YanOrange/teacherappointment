@@ -136,7 +136,8 @@
         var fit = $('#fit').val();
         var phone = $('#phone').val();
         var status = $('#status').val();
-        if (!(title && address && content && phone && description && price && lesson && fit && status)) {
+        var type = $('#type').val();
+        if (!(title && address && content && phone && description && price && lesson && fit && status && type)) {
             Zepto.dialog({
                 type: 'tips',
                 contentHtml: '参数不完整',
@@ -154,6 +155,7 @@
                 description: description,
                 price: price,
                 lesson: lesson,
+                type: type,
                 fit: fit,
                 status: status
             },
@@ -161,10 +163,10 @@
                 if (res.success) {
                     Zepto.dialog({
                         type: 'tips',
-                        contentHtml: '注册成功',
+                        contentHtml: '发布成功',
                         autoClose: 2000,
                         onClosed: function () {
-                            location.href = '/page/login'
+                            history.back(-1)
                         }
                     })
                 }

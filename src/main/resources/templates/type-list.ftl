@@ -161,84 +161,33 @@
     <!--公共头部-->
     <header class="global-header search-header border-1px-bottom bg-red">
         <div class="center-area">家教预约平台</div>
-        <div style="position: absolute;right:0.2rem;top: 0;" id="slideType">切换分类</div>
+        <div style="position: absolute;right:0.2rem;top: 0;" id="slideType">教育类/艺术类</div>
     </header>
 
     <div class="type-list">
         <ul>
-            <li class="active" data-type="">分类1</li>
-            <li data-type="">分类2</li>
-            <li data-type="">分类3</li>
-            <li data-type="">分类4</li>
+            <li data-type="0" class="active">小学</li>
+            <li data-type="1">中学</li>
+            <li data-type="2">高中</li>
+            <li data-type="3">中考</li>
+            <li data-type="4">高考</li>
+            <li data-type="5">小升初</li>
         </ul>
     </div>
     <div class="content-list">
-        <div class="item">
-            <div class="title-warper">
-                <div class="title-left">
-                    <span>课程名称</span>
-                </div>
-                <div class="del">
-                    <span>￥35</span>
-                </div>
-                <div class="price">
-                    <span>￥35</span>
-                    <span class="font">起</span>
-                </div>
-            </div>
-            <div class="address">
-                <div class="address-left">
-                    <span>简介简介简介简介简介简介适合小学一年级</span>
-                </div>
-                <div class="distance">
-                    <span>博士</span>
-                    <span>求助帖</span>
-                </div>
-            </div>
-            <div class="support-tags">
-                <span class="tag-orange">优质教师</span>
-                <span class="tag-gray">耐心</span>
-            </div>
-        </div>
-        <div class="item">
-            <div class="title-warper">
-                <div class="title-left">
-                    <span>课程名称</span>
-                </div>
-                <div class="del">
-                    <span>￥35</span>
-                </div>
-                <div class="price">
-                    <span>￥35</span>
-                    <span class="font">起</span>
-                </div>
-            </div>
-            <div class="address">
-                <div class="address-left">
-                    <span>简介简介简介简介简介简介适合小学一年级</span>
-                </div>
-                <div class="distance">
-                    <span>博士</span>
-                    <span>家教贴</span>
-                </div>
-            </div>
-            <div class="support-tags">
-                <span class="tag-orange">优质教师</span>
-                <span class="tag-gray">耐心</span>
-            </div>
-        </div>
+
     </div>
 
 
 </div>
 <!--底部工具栏-->
 <div class="global-footer">
-    <a href="/page/index" class="home active">
-        <div class="img"><img src="../img/icons/home-active.png"></div>
+    <a href="/page/index" class="home ">
+        <div class="img"><img src="../img/icons/home.png"></div>
         <div class="text">首页</div>
     </a>
-    <a href="/page/index" class="home">
-        <div class="img"><img src="../img/icons/home-active.png"></div>
+    <a href="/page/index" class="home active">
+        <div class="img"><img src="../img/icons/type-active.png"></div>
         <div class="text">分类</div>
     </a>
     <a href="/page/person" class="home">
@@ -260,33 +209,35 @@
         $('.type-list').on('click', 'li', function () {
             $(this).siblings().removeClass('active');
             $(this).addClass('active');
-            $(this).data('typeid')
-            getContent(1);
+            var typeid = $(this).data('typeid')
+            getContent(typeid);
         })
-        // getContent(1);
+        getContent(0);
     })
 
     $('.global-header').on('click', '#slideType', function () {
 
-        $('.type-list ul').html('<li data-type="">分类6</li>\n' +
-            '            <li data-type="">分类6</li>\n' +
-            '            <li data-type="">分类6</li>');
+        $('.type-list ul').html('<li data-type="6">篮球</li>\n' +
+            '            <li data-type="7">钢琴</li>\n' +
+            '            <li data-type="8">舞蹈</li>');
         $(this).attr('id', 'slideType2')
     })
 
     $('.global-header').on('click', '#slideType2', function () {
 
-        $('.type-list ul').html('<li data-type="">分类1</li>\n' +
-            '            <li data-type="">分类2</li>\n' +
-            '            <li data-type="">分类3</li>\n' +
-            '            <li data-type="">分类4</li>');
+        $('.type-list ul').html('<li data-type="0">小学</li>\n' +
+            '            <li data-type="1">中学</li>\n' +
+            '            <li data-type="2">高中</li>\n' +
+            '            <li data-type="3">中考</li>\n' +
+            '            <li data-type="4">高考</li>\n' +
+            '            <li data-type="5">小升初</li>');
         $(this).attr('id', 'slideType')
     })
 
 
     function getContent(typeId) {
         $.ajax({
-            url: '/lesson/getContent',
+            url: '/content/getContent',
             data: {
                 typeId: typeId
             },
@@ -299,24 +250,28 @@
                         html += '<div class="item">\n' +
                             '            <div class="title-warper">\n' +
                             '                <div class="title-left">\n' +
-                            '                    <span>课程名称</span>\n' +
+                            '                    <span>' + r.title + '</span>\n' +
                             '                </div>\n' +
                             '                <div class="del">\n' +
-                            '                    <span>￥35</span>\n' +
+                            '                    <span>￥' + r.price + '</span>\n' +
                             '                </div>\n' +
                             '                <div class="price">\n' +
-                            '                    <span>￥35</span>\n' +
+                            '                    <span>￥' + r.price + '</span>\n' +
                             '                    <span class="font">起</span>\n' +
                             '                </div>\n' +
                             '            </div>\n' +
                             '            <div class="address">\n' +
                             '                <div class="address-left">\n' +
-                            '                    <span>简介简介简介简介简介简介适合小学一年级</span>\n' +
+                            '                    <span>' + r.description + '</span>\n' +
                             '                </div>\n' +
                             '                <div class="distance">\n' +
-                            '                    <span>博士</span>\n' +
-                            '                    <span>家教贴</span>\n' +
-                            '                </div>\n' +
+                            '                    <span>' + r.user.education + '</span>\n';
+                        if (r.status == 0) {
+                            html += '                    <span>家教帖</span>\n';
+                        } else {
+                            html += '                    <span>求助帖</span>\n';
+                        }
+                        html += '                </div>\n' +
                             '            </div>\n' +
                             '            <div class="support-tags">\n' +
                             '                <span class="tag-orange">优质教师</span>\n' +

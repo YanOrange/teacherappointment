@@ -1,6 +1,8 @@
 package com.delay.teacherappointment.interceptor;
 
+import com.delay.teacherappointment.entity.Admin;
 import com.delay.teacherappointment.entity.User;
+import com.delay.teacherappointment.service.AdminService;
 import com.delay.teacherappointment.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Component
-public class LoginInterceptor implements HandlerInterceptor {
+public class AdminInterceptor implements HandlerInterceptor {
 
-    @Autowired
-    UserService userService;
     Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
@@ -25,7 +25,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         HttpSession session = request.getSession();
 
-        User user = (User) session.getAttribute("user");
+        Admin user = (Admin) session.getAttribute("admin");
         if(user == null){
 //            user = new User();
 //            user = userService.findById(1).orElse(null);
@@ -35,7 +35,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
             return true;
         }
-        response.sendRedirect("/page/login");
+        response.sendRedirect("/page/managerLogin");
         return false;
     }
 }

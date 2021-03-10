@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,16 +24,54 @@ public class ContentController extends BaseController {
     @Autowired
     ContentService contentService;
 
+    /**
+     * 用户文章列表
+     * @return
+     */
     @RequestMapping("findListByUserId")
     @ResponseBody
     public ExecuteResult findListByUserId() {
         User user = getUser();
         List<Content> list = contentService.findByUserId(user.getId());
         return ExecuteResult.ok(list);
-//        return null;
+    }
+
+    /**
+     * 根据分类获取文章列表
+     * @param typeId
+     * @return
+     */
+    @RequestMapping("getContent")
+    @ResponseBody
+    public ExecuteResult getContent(Integer typeId){
+        List<Content> list = contentService.findByType(typeId);
+        return ExecuteResult.ok(list);
+    }
+
+    /**
+     * 获取全部(数量)
+     * @param num
+     * @return
+     */
+    @RequestMapping("findAll")
+    @ResponseBody
+    public ExecuteResult findAll(Integer num){
+        List<Content> list;
+        if(num==null){
+            list = contentService.findAll();
+        }else{
+            list = contentService.findByLimit(num);
+        }
+
+        return ExecuteResult.ok(list);
     }
 
 
+    /**
+     * 发表文章
+     * @param content
+     * @return
+     */
     @RequestMapping("publish")
     @ResponseBody
     public ExecuteResult publish(Content content) {

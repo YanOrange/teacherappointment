@@ -1,7 +1,12 @@
 package com.delay.teacherappointment.controller;
 
+import com.delay.teacherappointment.entity.Admin;
 import com.delay.teacherappointment.entity.User;
+import com.delay.teacherappointment.repository.UserRepository;
+import com.delay.teacherappointment.service.AdminService;
 import com.delay.teacherappointment.utils.ExecuteResult;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +29,9 @@ public class UserController extends BaseController{
     @Autowired
     UserRepository userService;
 
+    @Autowired
+    AdminService adminService;
+
     @RequestMapping("register")
     @ResponseBody
     public ExecuteResult register(User user){
@@ -33,7 +41,8 @@ public class UserController extends BaseController{
         }
         user.setCreateTime(new Date());
         user.setInvalid(0);
-        user.setReport(0);
+        user.setIsTeacher(0);
+        user.setStatus(0);
         userService.saveAndFlush(user);
         return ExecuteResult.ok();
     }
@@ -152,11 +161,49 @@ public class UserController extends BaseController{
         return ExecuteResult.ok(list);
     }
 
-    @RequestMapping("findByReport")
+    /**
+     * 检测身份
+     * @return
+     */
+    @RequestMapping("judgeIdent")
     @ResponseBody
-    public ExecuteResult reportList(){
-        List<User> users = userService.findByReport(1);
-        return ExecuteResult.ok(users);
+    public ExecuteResult judgeIdent(){
+        User user = userService.findById(getUser().getId()).orElse(null);
+        if(user.getStatus().equals(0)){
+            return ExecuteResult.fail("请先认证身份");
+        }else if(user.getStatus().equals(1)){
+            return ExecuteResult.fail("正在认证中");
+        }
+        return ExecuteResult.ok();
+    }
+
+    /**
+     * 注册用户
+     * @return
+     */
+    @RequestMapping("add")
+    @ResponseBody
+    public ExecuteResult add(Admin admin){
+        Admin byAccount = adminService.findByAccount(admin.getAccount());
+        if(byAccount!=null){
+            return ExecuteResult.fail(1,"用户名已存在");
+        }
+        admin.setCreateTime(new Date());
+        adminService.saveAndFlush(admin);
+        return ExecuteResult.ok();
+    }
+
+    /**
+     * 删除管理用户
+     * @return
+     */
+    @RequestMapping("`deleteAdmin`")
+    @ResponseBody
+    public ExecuteResult deleteAdmin(@RequestBody List<Integer> userIds){
+        userIds.stream().forEach(o->{
+            adminService.deleteById(o);
+        });
+        return ExecuteResult.ok();
     }
 
 

@@ -107,7 +107,7 @@
                     <i class="icon-phone"></i>
                 </div>
                 <div class="inp-group">
-                    <input class="inp" placeholder="请输入密码" id="verCode">
+                    <input class="inp" placeholder="请输入密码" id="verCode" type="passWord">
                     <i class="icon-vercode" ></i>
                 </div>
                 <div class="" style="text-align: right;padding: 0 0.2rem;">

@@ -23,5 +23,4 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     List<User> findByStatus(int i);
 
-    List<User> findByReport(int i);
 }

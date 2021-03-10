@@ -109,16 +109,16 @@
 
     <!--底部工具栏-->
     <div class="global-footer">
-        <a href="/page/index" class="home active">
-            <div class="img"><img src="../img/icons/home-active.png"></div>
+        <a href="/page/index" class="home">
+            <div class="img"><img src="../img/icons/home.png"></div>
             <div class="text">首页</div>
         </a>
         <a href="/page/type" class="home">
-            <div class="img"><img src="../img/icons/home-active.png"></div>
+            <div class="img"><img src="../img/icons/type.png"></div>
             <div class="text">分类</div>
         </a>
-        <a href="/page/person" class="home">
-            <div class="img"><img src="../img/icons/my.png"></div>
+        <a href="/page/person" class="home active">
+            <div class="img"><img src="../img/icons/my-active.png"></div>
             <div class="text">个人中心</div>
         </a>
     </div>

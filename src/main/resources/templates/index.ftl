@@ -456,7 +456,7 @@
                     <span class="class-name">查看我的发布</span>
                 </div>
             </a>
-            <a href="/page/publish">
+            <a href="javascript:;" onclick="judgeIdent();">
                 <div class="class-item">
                     <img src="/img/search.png">
                     <span class="class-name">发布预约</span>
@@ -470,60 +470,7 @@
     </div>
     <div class="item-box" style="margin-top:0.3rem;">
         <div class="content-list">
-            <div class="item">
-                <div class="title-warper">
-                    <div class="title-left">
-                        <span>课程名称</span>
-                    </div>
-                    <div class="del">
-                        <span>￥35</span>
-                    </div>
-                    <div class="price">
-                        <span>￥35</span>
-                        <span class="font">起</span>
-                    </div>
-                </div>
-                <div class="address">
-                    <div class="address-left">
-                        <span>简介简介简介简介简介简介适合小学一年级</span>
-                    </div>
-                    <div class="distance">
-                        <span>博士</span>
-                        <span>求助帖</span>
-                    </div>
-                </div>
-                <div class="support-tags">
-                    <span class="tag-orange">优质教师</span>
-                    <span class="tag-gray">耐心</span>
-                </div>
-            </div>
-            <div class="item">
-                <div class="title-warper">
-                    <div class="title-left">
-                        <span>课程名称</span>
-                    </div>
-                    <div class="del">
-                        <span>￥35</span>
-                    </div>
-                    <div class="price">
-                        <span>￥35</span>
-                        <span class="font">起</span>
-                    </div>
-                </div>
-                <div class="address">
-                    <div class="address-left">
-                        <span>简介简介简介简介简介简介适合小学一年级</span>
-                    </div>
-                    <div class="distance">
-                        <span>博士</span>
-                        <span>家教贴</span>
-                    </div>
-                </div>
-                <div class="support-tags">
-                    <span class="tag-orange">优质教师</span>
-                    <span class="tag-gray">耐心</span>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
@@ -534,7 +481,7 @@
         <div class="text">首页</div>
     </a>
     <a href="/page/type" class="home">
-        <div class="img"><img src="../img/icons/home-active.png"></div>
+        <div class="img"><img src="../img/icons/type.png"></div>
         <div class="text">分类</div>
     </a>
     <a href="/page/person" class="home">
@@ -553,7 +500,21 @@
 <script>
     $(function () {
         banner_init();
+        getContent();
     })
+
+    function judgeIdent(){
+        $.ajax({
+            url:'/user/judgeIdent',
+            success:function(res){
+                if(res.success){
+                    location.href='/page/publish';
+                }else{
+                    alert(res.msg)
+                }
+            }
+        })
+    }
 
     // banner图初始化
     function banner_init() {
@@ -565,6 +526,58 @@
             autoplayDisableOnInteraction: false, // 滑动后继续轮播
             paginationBulletRender: function (swiper, index, className) {
                 return '<span class="' + className + '">' + (index + 1) + '/' + slide_len + '</span>';
+            }
+        })
+    }
+
+    function getContent() {
+        $.ajax({
+            url: '/content/findAll',
+            data: {
+                num: 10
+            },
+            dataType: 'json',
+            success: function (res) {
+                if (res.success) {
+                    var data = res.data;
+                    var html = '';
+                    $.each(data, function (i, r) {
+                        html += '<div class="item">\n' +
+                            '            <div class="title-warper">\n' +
+                            '                <div class="title-left">\n' +
+                            '                    <span>' + r.title + '</span>\n' +
+                            '                </div>\n' +
+                            '                <div class="del">\n' +
+                            '                    <span>￥' + r.price + '</span>\n' +
+                            '                </div>\n' +
+                            '                <div class="price">\n' +
+                            '                    <span>￥' + r.price + '</span>\n' +
+                            '                    <span class="font">起</span>\n' +
+                            '                </div>\n' +
+                            '            </div>\n' +
+                            '            <div class="address">\n' +
+                            '                <div class="address-left">\n' +
+                            '                    <span>' + r.description + '</span>\n' +
+                            '                </div>\n' +
+                            '                <div class="distance">\n' +
+                            '                    <span>' + r.user.education + '</span>\n';
+                        if (r.status == 0) {
+                            html += '                    <span>家教帖</span>\n';
+                        } else {
+                            html += '                    <span>求助帖</span>\n';
+                        }
+                        html += '                </div>\n' +
+                            '            </div>\n' +
+                            '            <div class="support-tags">\n' +
+                            '                <span class="tag-orange">优质教师</span>\n' +
+                            '                <span class="tag-gray">耐心</span>\n' +
+                            '            </div>\n' +
+                            '        </div>';
+                    })
+                    $('.content-list').html(html);
+                } else {
+                    alert(res.msg);
+                }
             }
         })
     }
