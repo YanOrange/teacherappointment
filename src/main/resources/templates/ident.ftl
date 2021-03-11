@@ -86,7 +86,7 @@
             return false;
         }
 
-        location.href='/page/teacher';
+        location.href='/page/teacher?idCard='+idCard;
 
     }
 

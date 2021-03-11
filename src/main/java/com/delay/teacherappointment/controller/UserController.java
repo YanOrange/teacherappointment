@@ -52,6 +52,9 @@ public class UserController extends BaseController{
     public ExecuteResult login (String userName, String passWord, HttpSession session){
         User user = userService.findByUserNameAndPassWord(userName,passWord);
         if(user!=null){
+            if(user.getInvalid().equals(1)){
+                return ExecuteResult.fail("用户状态异常");
+            }
             session.setAttribute("user",user);
             return ExecuteResult.ok();
         }
@@ -101,7 +104,7 @@ public class UserController extends BaseController{
 
     @RequestMapping("doTeacher")
     @ResponseBody
-    public ExecuteResult doTeacher(String school,String education,String eduNo){
+    public ExecuteResult doTeacher(String school,String education,String eduNo,String idCard){
         User user = getUser();
         User user1 = userService.findById(user.getId()).orElse(null);
         user1.setStatus(1);
@@ -109,6 +112,7 @@ public class UserController extends BaseController{
         user1.setEducation(education);
         user1.setEduNo(eduNo);
         user1.setIsTeacher(1);
+        user1.setIdCard(idCard);
         userService.save(user1);
         return ExecuteResult.ok();
     }

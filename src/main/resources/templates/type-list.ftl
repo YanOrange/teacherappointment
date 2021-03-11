@@ -116,7 +116,7 @@
         }
 
         .distance {
-            width: 18vw;
+            width: 20vw;
             text-align: right;
         }
 

@@ -130,18 +130,27 @@
         }
         .warn-content{
             position: absolute;
-            top:0;
-            bottom:0;
-            left:0;
-            right:0;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
             margin: auto;
-            width:5rem;
-            height:3rem;
+            width: 5rem;
+            height: 1.5rem;
             background: #fff;
-            border:1px solid #ababab;
-            padding:1rem;
+            border: 1px solid #e0e0e0;
+            padding: 1rem;
             border-radius: 0.3rem;
+            box-shadow: 0 0 20px rgb(66 66 66 / 25%);
             display: none;
+        }
+        .warn-content button{
+            height: 0.6rem;
+            width: 45%;
+            text-align: center;
+            line-height: 0.6rem;
+            color: #fff;
+            margin-top: 0.3rem;
         }
 
 
@@ -162,6 +171,7 @@
         <span>${user.name!''}</span>
         <span style="margin-left:0.2rem;">${user.education!''}</span>
         <span style="margin-left:0.2rem;">适合${content.fit!''}</span>
+        <span style="margin-left:0.2rem;">${content.createTime!''}</span>
     </div>
     <div class="description">
         简介：<span>${content.description!''}</span>
@@ -201,10 +211,10 @@
         举报
     </div>
     <div class="warn-content">
-        举报内容：
-        <input type="text" id="warn-content" placeholder="请输入举报内容">
-        <button onclick="warnCommit();">提交</button>
-        <button onclick="cancelCommit();">取消</button>
+        举报内容
+        <input type="text" id="warn-content" placeholder="请输入举报内容" style="border: 1px solid #cecece;">
+        <button onclick="warnCommit();" style="background: #ff5400;">提交</button>
+        <button onclick="cancelCommit();" style="background: #00ad25;">取消</button>
     </div>
 
 </div>
@@ -278,6 +288,10 @@
     function warnCommit(){
         var contentId = $('#contentId').val();
         var content = $('#warn-content').val();
+        if(!content){
+            alert("举报内容不能为空");
+            return;
+        }
         $.ajax({
             url:'/warn/warnCommit',
             data:{
@@ -287,7 +301,7 @@
             success:function (res){
                 if (res.success){
                     alert("提交成功")
-                    $('#warn-content').hide();
+                    $('.warn-content').hide();
                 } else{
                     alert(res.msg)
                 }

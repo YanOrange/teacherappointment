@@ -70,6 +70,7 @@
             <div class="tit">学位证编号</div>
             <input type="tel" placeholder="请输入学位证编号" value="" id="eduNo">
         </div>
+        <input id="idCard" value="#{idCard}" type="hidden">
     </div>
     <!--底部工具栏-->
     <div class="global-footer for-edit">
@@ -85,6 +86,7 @@
         var school = $('#school').val();
         var education = $('#education').val();
         var eduNo = $('#eduNo').val();
+        var idCard = $('#idCard').val();
         if(!(school&&education&&eduNo)){
             Zepto.dialog({
                 type:'tips',
@@ -98,7 +100,8 @@
             data:{
                 school:school,
                 education:education,
-                eduNo:eduNo
+                eduNo:eduNo,
+                idCard:idCard
             },
             success:function (res) {
                 if (res.success){

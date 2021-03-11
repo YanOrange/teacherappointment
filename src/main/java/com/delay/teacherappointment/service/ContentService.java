@@ -17,4 +17,6 @@ public interface ContentService extends JpaRepository<Content,Integer> {
 
     @Query(nativeQuery = true, value="select c.* from t_content c limit ?1")
     List<Content> findByLimit(Integer num);
+
+    List<Content> findByTitleLike(String s);
 }

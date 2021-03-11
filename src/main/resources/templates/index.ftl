@@ -368,7 +368,7 @@
         }
 
         .distance {
-            width: 18vw;
+            width: 20vw;
             text-align: right;
         }
 
@@ -450,16 +450,16 @@
                     <span class="class-name">预约家教列表</span>
                 </div>
             </a>
-            <a href="/page/contentList">
-                <div class="class-item">
-                    <img src="/img/show.png">
-                    <span class="class-name">查看我的发布</span>
-                </div>
-            </a>
             <a href="javascript:;" onclick="judgeIdent();">
                 <div class="class-item">
-                    <img src="/img/search.png">
+                    <img src="/img/show.png">
                     <span class="class-name">发布预约</span>
+                </div>
+            </a>
+            <a href="/page/search">
+                <div class="class-item">
+                    <img src="/img/search.png">
+                    <span class="class-name">搜索</span>
                 </div>
             </a>
         </div>

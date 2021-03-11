@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class ContentController extends BaseController {
     public ExecuteResult findListByUserId() {
         User user = getUser();
         List<Content> list = contentService.findByUserId(user.getId());
+        list.sort(Comparator.comparing(Content::getCreateTime).reversed());
         return ExecuteResult.ok(list);
     }
 
@@ -48,6 +50,7 @@ public class ContentController extends BaseController {
     @ResponseBody
     public ExecuteResult getContent(Integer typeId){
         List<Content> list = contentService.findByType(typeId);
+        list.sort(Comparator.comparing(Content::getCreateTime).reversed());
         return ExecuteResult.ok(list);
     }
 
@@ -65,7 +68,7 @@ public class ContentController extends BaseController {
         }else{
             list = contentService.findByLimit(num);
         }
-
+        list.sort(Comparator.comparing(Content::getCreateTime).reversed());
         return ExecuteResult.ok(list);
     }
 
@@ -89,6 +92,19 @@ public class ContentController extends BaseController {
         contentService.saveAndFlush(content);
         return ExecuteResult.ok();
 
+    }
+
+    /**
+     * 搜索
+     * @param key
+     * @return
+     */
+    @RequestMapping("search")
+    @ResponseBody
+    public ExecuteResult search(String key){
+        List<Content> list = contentService.findByTitleLike("%"+key+"%");
+        list.sort(Comparator.comparing(Content::getCreateTime).reversed());
+        return ExecuteResult.ok(list);
     }
 
 

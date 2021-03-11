@@ -77,7 +77,8 @@ public class PageController extends BaseController{
     }
 
     @RequestMapping("teacher")
-    public String teacher(){
+    public String teacher(String idCard,Model model){
+        model.addAttribute("idCard",idCard);
         return "teacher";
     }
 
@@ -134,5 +135,9 @@ public class PageController extends BaseController{
         return "admin/login";
     }
 
+    @RequestMapping("search")
+    public String search(){
+        return "search";
+    }
 
 }
