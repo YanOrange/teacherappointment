@@ -145,16 +145,16 @@
                     var table = layui.table;
                     table.render({
                         id: "checkboxTable",
-                        url: '/user/findAllByStatus?status=3',
+                        url: '/user/findAllAdmin',
                         elem: '#LAY_table_user',
                         page: true,
                         cols: [[
                             {checkbox: true},
                             {field: 'id', title: 'ID', width: 80},
-                            {field: 'name', title: '姓名', sort: true, width: 120},
                             {field: 'phone', title: '联系方式', sort: true, width: 150},
                             {field: 'address', title: '地址', sort: true, width: 150},
                             {field: 'email', title: '电子邮箱', sort: true, width: 120},
+                            {field: 'createTime', title: '创建时间', sort: true, width: 120},
                             {toolbar: '#barTeacher', title: '操作', width: 120}
 
                         ]]
