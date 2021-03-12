@@ -168,6 +168,17 @@ public class UserController extends BaseController{
     }
 
     /**
+     * 查找全部admin
+     * @return
+     */
+    @RequestMapping("findAllAdmin")
+    @ResponseBody
+    public ExecuteResult findAllAdmin(){
+        List<Admin> all = adminService.findAll();
+        return ExecuteResult.ok(all);
+    }
+
+    /**
      * 检测身份
      * @return
      */

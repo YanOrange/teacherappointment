@@ -74,7 +74,9 @@ public class MyConfig implements WebMvcConfigurer {
                 "/page/add",
                 "/warn/findAll",
                 "/warn/refuse",
-                "/warn/pass"
+                "/warn/pass",
+                "/page/adminList",
+                "/user/findAllAdmin"
 
 
         );

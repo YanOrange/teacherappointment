@@ -140,4 +140,11 @@ public class PageController extends BaseController{
         return "search";
     }
 
+
+    @RequestMapping("adminList")
+    public String adminList(){
+        return "admin/admin-list";
+    }
+
+
 }

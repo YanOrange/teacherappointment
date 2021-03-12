@@ -111,6 +111,21 @@
 
                         </ul>
                     </li>
+
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe6b8;</i>
+                            <cite>管理员管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('管理员列表','/page/adminList')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>管理员列表</cite></a>
+                            </li>
+
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
