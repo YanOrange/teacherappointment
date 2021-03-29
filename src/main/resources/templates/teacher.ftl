@@ -70,7 +70,7 @@
             <div class="tit">学位证编号</div>
             <input type="tel" placeholder="请输入学位证编号" value="" id="eduNo">
         </div>
-        <input id="idCard" value="#{idCard}" type="hidden">
+        <input id="idCard" value="${idCard}" type="hidden">
     </div>
     <!--底部工具栏-->
     <div class="global-footer for-edit">

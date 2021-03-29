@@ -66,7 +66,7 @@
         </div>
         <div class="input-group border-1px-bottom">
             <div class="tit">简介</div>
-            <input type="passWord" placeholder="请输入简介" value="" id="description">
+            <input type="text" placeholder="请输入简介" value="" id="description">
         </div>
         <div class="input-group border-1px-bottom">
             <div class="tit">预期价格/小时</div>
