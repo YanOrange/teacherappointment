@@ -62,7 +62,7 @@
     <div class="form">
         <div class="input-group border-1px-bottom">
             <div class="tit">标题</div>
-            <input type="tel" placeholder="请输入标题" value="" id="title">
+            <input type="text" placeholder="请输入标题" value="" id="title">
         </div>
         <div class="input-group border-1px-bottom">
             <div class="tit">简介</div>
@@ -70,7 +70,7 @@
         </div>
         <div class="input-group border-1px-bottom">
             <div class="tit">预期价格/小时</div>
-            <input type="tel" placeholder="请输入价格" value="" id="price">
+            <input type="number" placeholder="请输入价格" value="" id="price">
         </div>
         <div class="input-group border-1px-bottom">
             <div class="tit">分类</div>
@@ -89,11 +89,11 @@
         </div>
         <div class="input-group border-1px-bottom">
             <div class="tit">课程</div>
-            <input type="tel" placeholder="请输入课程" value="" id="lesson">
+            <input type="text" placeholder="请输入课程" value="" id="lesson">
         </div>
         <div class="input-group border-1px-bottom">
             <div class="tit">适合人群</div>
-            <input type="tel" placeholder="请输入适合人群" value="" id="fit">
+            <input type="text" placeholder="请输入适合人群" value="" id="fit">
         </div>
         <div class="input-group border-1px-bottom">
             <div class="tit">内容</div>
@@ -101,11 +101,11 @@
         </div>
         <div class="input-group border-1px-bottom">
             <div class="tit">联系方式</div>
-            <input type="tel" placeholder="请输入手机号码" value="" id="phone">
+            <input type="text" placeholder="请输入手机号码" value="" id="phone">
         </div>
         <div class="input-group border-1px-bottom">
             <div class="tit">授课地址</div>
-            <input type="tel" placeholder="请输入授课地址" value="" id="address">
+            <input type="text" placeholder="请输入授课地址" value="" id="address">
         </div>
         <div class="input-group border-1px-bottom">
             <div class="tit">文章类型</div>
